@@ -1,0 +1,12 @@
+@use "styles/colors" as *;
+
+.container {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  grid-template-rows: 1fr 90px;
+  grid-template-areas:
+    "nav main"
+    "playing-bar playing-bar";
+  min-height: 100vh;
+  width: 100%;
+}
