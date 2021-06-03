@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

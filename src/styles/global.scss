@@ -1,3 +1,5 @@
+@use "./colors" as *;
+
 html,
 body {
   padding: 0;
@@ -15,4 +17,26 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.ant-slider {
+  &:hover {
+    .ant-slider {
+      &-rail {
+        background-color: hsl(0, 0%, 33%);
+      }
+      &-track {
+        background-color: $primary;
+      }
+    }
+  }
+  &-track {
+    background-color: $primary;
+  }
+  &-rail {
+    background-color: #535353;
+  }
+  &-handle {
+    border: none;
+  }
 }
