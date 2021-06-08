@@ -1,0 +1,48 @@
+@use "styles/colors" as *;
+
+$background-color: #121212;
+$height: 32px;
+
+.container {
+  padding: 0 32px;
+  grid-area: main;
+  background: linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(18, 18, 18, 1) 100%);
+}
+.header {
+  height: 60px;
+  position: sticky;
+  top: 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.navigationBtn {
+  color: $grey;
+  cursor: pointer;
+  & > svg {
+    font-size: 30px;
+  }
+  &s {
+    display: flex;
+    align-items: center;
+  }
+}
+.user {
+  height: $height;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 0;
+  border-radius: calc(32px / 2);
+  padding: 2px 5px 2px 2px;
+  cursor: pointer;
+
+  &_name {
+    margin: 0 6px;
+    font-weight: 700;
+  }
+
+  & > img {
+    border-radius: 50%;
+  }
+}

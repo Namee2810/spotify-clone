@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+
+  &_name {
+    padding-left: 6px;
+    font: {
+      size: 26px;
+      weight: 500;
+    }
+  }
+}

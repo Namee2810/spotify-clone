@@ -1,0 +1,52 @@
+@use "styles/colors" as *;
+.container {
+  grid-area: nav;
+  display: flex;
+  flex-direction: column;
+  background-color: $black;
+
+  padding: 24px 10px 0;
+}
+.navigation {
+  margin-top: 20px;
+  &_item {
+    height: 40px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    color: $grey;
+    transition: all 0.25s;
+    &:hover {
+      color: $white;
+    }
+  }
+  &_title {
+    padding-left: 10px;
+    font-weight: 700;
+  }
+  &_icon > svg {
+    vertical-align: middle;
+    font-size: 24px;
+  }
+  &_active {
+    color: $white;
+    border-radius: 4px;
+    background-color: #282828;
+  }
+}
+.playlist {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  color: $grey;
+  border-top: 1px solid #282828;
+
+  &_item {
+    padding: 6px 0;
+    font-weight: 500;
+    transition: all 0.25s;
+    &:hover {
+      color: $white;
+    }
+  }
+}
