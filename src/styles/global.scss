@@ -19,6 +19,12 @@ a {
   box-sizing: border-box;
 }
 
+button {
+  border: 0;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
 .ant-slider {
   &:hover {
     .ant-slider {
@@ -38,5 +44,20 @@ a {
   }
   &-handle {
     border: none;
+  }
+}
+.ant-dropdown-menu {
+  background-color: $black;
+  &-item {
+    color: $white;
+    &:hover {
+      background-color: #3e3e3e;
+    }
+  }
+}
+a {
+  color: $grey;
+  &:hover {
+    color: $white;
   }
 }
