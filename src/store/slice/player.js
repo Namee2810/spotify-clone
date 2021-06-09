@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { notification } from "antd";
+import { message } from "antd";
 import spotify from "utils/spotify";
 
 export const getPlaybackState = createAsyncThunk("player/getPlaybackState", async (_, { rejectWithValue }) => {
@@ -53,8 +53,8 @@ const slice = createSlice({
       if (!payload || payload.currently_playing_type === "ad") return;
       //console.log(payload);
       const item = payload.item;
-      if (!item.preview_url) notification.warning({ message: "This song doesn't have preview" })
-      state.isPlaying = payload.is_playing;
+      if (!item.preview_url) message.warning("This song doesn't have preview!")
+      //state.isPlaying = payload.is_playing;
       state.settings = {
         shuffle: payload.shuffle_state,
         repeat: payload.repeat_state === "off" ? 0 : payload.repeat_state === "track" ? 2 : 1,

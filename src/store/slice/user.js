@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { notification } from "antd";
+import { message } from "antd";
 import spotify from "utils/spotify";
 
 const initialState = {
@@ -7,7 +7,8 @@ const initialState = {
   token: null,
   playlist: [],
   signInLoading: false,
-  recentlyPlayed: []
+  recentlyPlayed: [],
+  recommend: []
 }
 
 //thunk
@@ -21,8 +22,12 @@ export const getUserPlaylist = createAsyncThunk("user/getUserPlaylist", async ()
   return playlist
 })
 export const getUserRecentlyPlayed = createAsyncThunk("user/getUserRecentlyPlayed", async () => {
-  const recentlyPlayed = await spotify.getMyRecentlyPlayedTracks();
+  const recentlyPlayed = await spotify.getMyRecentlyPlayedTracks({ limit: 8 });
   return recentlyPlayed
+})
+export const getRecommendations = createAsyncThunk("user/getRecommendations", async () => {
+  const recommend = await spotify.getRecommendations();
+  return recommend
 })
 
 //slice
@@ -46,13 +51,17 @@ const slice = createSlice({
     },
     [signIn.rejected]: (state, { payload }) => {
       state.signInLoading = false;
-      notification.error({ message: "This session has expired!" });
+      message.error("This session has expired!");
       localStorage.removeItem("token")
     },
     [getUserPlaylist.fulfilled]: (state, { payload }) => {
       state.playlist = payload.items;
     },
     [getUserRecentlyPlayed.fulfilled]: (state, { payload }) => {
+      state.recentlyPlayed = payload.items
+      console.log(payload.items);
+    },
+    [getRecommendations.fulfilled]: (state, { payload }) => {
       console.log(payload);
     }
   }

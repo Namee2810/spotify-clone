@@ -12,7 +12,7 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import VolumeDownIcon from '@material-ui/icons/VolumeDown';
 import VolumeMuteIcon from '@material-ui/icons/VolumeMute';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
-import { Slider } from 'antd';
+import { message, Slider } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -38,8 +38,10 @@ export default function PlayingBar() {
   }
 
   const handleClickPlay = () => {
-    if (isPlaying) audioRef.current.pause();
-    else audioRef.current.play();
+    if (!playingTrack) return message.warning("There are no song available right now!");
+    if (!playingTrack?.preview_url) return message.warning("This song doesn't have preview!");
+    if (isPlaying) { audioRef.current.pause(); }
+    else audioRef.current.play()
     dispatch(SET_PLAYING())
   }
   const handleLoadedPreviewSong = () => {
@@ -122,7 +124,7 @@ export default function PlayingBar() {
             tipFormatter={convertTime} step={1}
             className={styles.playback_progress} onChange={handleChangePlayback}
           />
-          <div className={styles.playback_time}>{convertTime(time?.duration || 0)}</div>
+          <div className={styles.playback_time}>-{convertTime((time?.duration - time?.current) || 0)}</div>
         </div>
       </div>
       <div className={styles.subcontainer}>
