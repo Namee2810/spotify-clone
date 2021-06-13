@@ -47,6 +47,7 @@ export default function PlayingBar() {
   const handleLoadedPreviewSong = () => {
     audioRef.current.volume = settings.volume / 100;
     dispatch(SET_TIME_TRACK({ duration: audioRef.current.duration, current: 0 }))
+    if (isPlaying) audioRef.current.play()
   }
   const handleTimeUpdateSong = () => {
     dispatch(SET_TIME_TRACK({ current: Math.round(audioRef.current.currentTime) }))

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { message } from "antd";
 import spotify from "utils/spotify";
 
-export const getPlaybackState = createAsyncThunk("player/getPlaybackState", async (_, { rejectWithValue }) => {
+export const getPlaybackState = createAsyncThunk("player/getPlaybackState", async () => {
   const playbackState = await spotify.getMyCurrentPlaybackState();
   return playbackState
 })
@@ -46,6 +46,24 @@ const slice = createSlice({
     },
     SET_PLAYING: (state, { payload }) => {
       state.isPlaying = !state.isPlaying;
+    },
+    SET_NEW_TRACK: (state, { payload }) => {
+      const item = payload.track;
+      if (!item.preview_url) message.warning("This song doesn't have preview!")
+      state.time = {
+        current: Math.round(payload.progress_ms / 1000),
+        duration: Math.round(item.duration_ms / 1000)
+      }
+      state.playingTrack = {
+        id: item.id,
+        album: {
+          id: item.album.id,
+          image: item.album.images[2].url
+        },
+        name: item.name,
+        artists: item.artists.map(i => ({ id: i.id, name: i.name })),
+        preview_url: item.preview_url
+      }
     }
   },
   extraReducers: {
@@ -80,4 +98,4 @@ const slice = createSlice({
 
 const { actions, reducer } = slice;
 export default reducer;
-export const { SET_SETTINGS, SET_TIME_TRACK, SET_PLAYING } = actions;
+export const { SET_SETTINGS, SET_TIME_TRACK, SET_PLAYING, SET_NEW_TRACK } = actions;

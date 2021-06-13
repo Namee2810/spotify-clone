@@ -1,7 +1,7 @@
 import Layout from 'layouts/Layout';
 import React from 'react';
+import FeaturedPlaylists from './components/FeaturedPlaylists';
 import RecentlyPlayed from './components/RecentlyPlayed';
-import Recommend from './components/Recommend';
 import styles from "./styles.module.scss";
 
 function getTimeOfDay() {
@@ -15,9 +15,9 @@ export default function HomePage() {
   return (
     <Layout>
       <div className={styles.container}>
-        <div className={styles.welcome}>Good {getTimeOfDay()}</div>
+        <div className="text-welcome mb-16">Good {getTimeOfDay()}</div>
         <RecentlyPlayed />
-        <Recommend />
+        <FeaturedPlaylists />
       </div>
     </Layout>
   )

@@ -8,7 +8,7 @@ const initialState = {
   playlist: [],
   signInLoading: false,
   recentlyPlayed: [],
-  recommend: []
+  featuredPlaylists: []
 }
 
 //thunk
@@ -25,9 +25,10 @@ export const getUserRecentlyPlayed = createAsyncThunk("user/getUserRecentlyPlaye
   const recentlyPlayed = await spotify.getMyRecentlyPlayedTracks({ limit: 8 });
   return recentlyPlayed
 })
-export const getRecommendations = createAsyncThunk("user/getRecommendations", async () => {
-  const recommend = await spotify.getRecommendations();
-  return recommend
+export const getFeaturedPlaylists = createAsyncThunk("user/getFeaturedPlaylists", async () => {
+  const featuredPlaylists = await spotify.getFeaturedPlaylists({ country: "VN" });
+  return featuredPlaylists;
+
 })
 
 //slice
@@ -59,10 +60,9 @@ const slice = createSlice({
     },
     [getUserRecentlyPlayed.fulfilled]: (state, { payload }) => {
       state.recentlyPlayed = payload.items
-      console.log(payload.items);
     },
-    [getRecommendations.fulfilled]: (state, { payload }) => {
-      console.log(payload);
+    [getFeaturedPlaylists.fulfilled]: (state, { payload }) => {
+      state.featuredPlaylists = payload
     }
   }
 })

@@ -4,7 +4,8 @@ $background-color: #121212;
 $height: 32px;
 
 .container {
-  padding: 0 32px;
+  height: calc(100vh - 90px);
+  overflow-y: auto;
   grid-area: main;
   background: linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(18, 18, 18, 1) 100%);
 }
@@ -17,6 +18,9 @@ $height: 32px;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0 32px;
 }
 .navigationBtn {
   color: $grey;
